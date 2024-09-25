@@ -1,0 +1,107 @@
+replicaCount: 1
+
+image:
+  serviceRegistry:
+    repository: nitesh2611/service-registry
+    tag: "11"
+  hotelService:
+    repository: nitesh2611/hotel-service
+    tag: "02"
+  userService:
+    repository: nitesh2611/user-service
+    tag: "09"
+  ratingService:
+    repository: nitesh2611/rating-service
+    tag: "03"
+
+resources:
+  serviceRegistry:
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+  hotelService:
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+  postgres:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+  userService:
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+  mysql:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+  ratingService:
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+  mongodb:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+
+service:
+  serviceRegistry:
+    type: LoadBalancer
+    port: 8761
+    targetPort: 8761
+  hotelService:
+    type: LoadBalancer
+    port: 8082
+    targetPort: 8082
+  userService:
+    type: LoadBalancer
+    port: 8081
+    targetPort: 8081
+  postgres:
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+  mysql:
+    type: ClusterIP
+    port: 3306
+    targetPort: 3306
+  ratingService:
+    type: LoadBalancer
+    port: 8082
+    targetPort: 8082
+  ratingServiceMongo:
+    type: ClusterIP
+    port: 27017
+    targetPort: 27017
+
+mysql:
+  rootPassword: "admin123"
+  dbName: "user_db"
+  user: "usersvc"
+  password: "password"
+
+mongodb:
+  rootPassword: "admin123"
+  dbName: "rating_db"
+  user: "ratingsuser"

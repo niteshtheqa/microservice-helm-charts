@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-service
+spec:
+  selector:
+    app: hotel-service
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.hotelService.port }}
+      targetPort: {{ .Values.service.hotelService.targetPort }}
+  type: {{ .Values.service.hotelService.type }}

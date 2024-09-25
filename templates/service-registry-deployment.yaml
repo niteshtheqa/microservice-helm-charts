@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-registry
+  labels:
+    app: service-registry
+    run: service-registry
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: service-registry
+      run: service-registry
+  template:
+    metadata:
+      labels:
+        app: service-registry
+        run: service-registry
+    spec:
+      containers:
+        - name: service-registry
+          image: "{{ .Values.image.serviceRegistry.repository }}:{{ .Values.image.serviceRegistry.tag }}"
+          resources:
+            limits:
+              cpu: {{ .Values.resources.serviceRegistry.limits.cpu }}
+              memory: {{ .Values.resources.serviceRegistry.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.serviceRegistry.requests.cpu }}
+              memory: {{ .Values.resources.serviceRegistry.requests.memory }}
+          ports:
+            - containerPort: 8761
